@@ -1,6 +1,8 @@
 import router from '../router';
 import i18n from './i18n';
 import {createPinia} from 'pinia';
+import api from './axios'
+
 /**
  * plugins/index.ts
  *
@@ -14,6 +16,7 @@ import type { App } from 'vue'
 import vuetify from './vuetify'
 
 export function registerPlugins (app: App) {
+ app.config.globalProperties.$api = api
  app.use(vuetify)
  app.use(createPinia());
  app.use(i18n);

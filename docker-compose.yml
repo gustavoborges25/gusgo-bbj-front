@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  jiujitsu-frontend:
+    container_name: jiujitsu-front-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000" # Mapeia a porta [Máquina Física : Container]
+    volumes:
+      - .:/app    # Espelha o código fonte para dentro do container
+      - /app/node_modules # Anônimo: Impede que o node_modules do container seja sobrescrito pela máquina física
+    environment:
+      - NODE_ENV=development

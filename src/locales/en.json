@@ -1,0 +1,46 @@
+{
+  "app": {
+    "title": "OSSO Jiu-Jitsu",
+    "subtitle": "Management System"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "students": "Students",
+    "instructors": "Instructors",
+    "classes": "Classes & Attendance",
+    "curriculum": "Belts & Curriculum"
+  },
+  "dashboard": {
+    "welcome": "Welcome Back, Sensei!",
+    "overview": "Here is the overview for your Jiu-Jitsu academy today.",
+    "active_students": "Active Students",
+    "instructors_count": "Instructors",
+    "today_classes": "Today's Classes"
+  },
+  "actions": {
+    "logout": "Log Out",
+    "login": "Sign In"
+  },
+    "students": {
+    "title": "Students Management",
+    "subtitle": "View, add, and manage your academy athletes.",
+    "search_placeholder": "Search student...",
+    "add_button": "Add Student",
+    "status_active": "Active",
+    "status_inactive": "Inactive",
+    "actions": "Actions",
+    "columns": {
+      "name": "Name",
+      "belt": "Belt",
+      "degrees": "Degrees",
+      "join_date": "Join Date",
+      "status": "Status"
+    },
+    "error_loading": "Error loading students list. Please try again later."
+  },
+  "errors": {
+    "not_found_title": "Page Not Found (404)",
+    "not_found_subtitle": "Oops! The sweep you tried to perform does not exist or the page has moved.",
+    "back_home": "Back to Dashboard"
+  }
+}

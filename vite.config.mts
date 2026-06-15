@@ -45,6 +45,10 @@ export default defineConfig({
     ],
   },
   server: {
+    host: '0.0.0.0',   // 👈 Essencial para o Docker expor o serviço para fora do container
     port: 3000,
+    watch: {
+      usePolling: true // 👈 Garante que a tela atualize sozinha quando você salvar o código na sua IDE
+    }
   },
 })

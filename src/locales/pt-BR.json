@@ -1,0 +1,46 @@
+{
+  "app": {
+    "title": "OSSO Jiu-Jitsu",
+    "subtitle": "Sistema de Gestão"
+  },
+  "menu": {
+    "dashboard": "Painel Principal",
+    "students": "Alunos",
+    "instructors": "Professores",
+    "classes": "Aulas & Chamadas",
+    "curriculum": "Faixas & Currículo"
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo de volta, Sensei!",
+    "overview": "Aqui está a visão geral da sua academia hoje.",
+    "active_students": "Alunos Ativos",
+    "instructors_count": "Professores",
+    "today_classes": "Aulas de Hoje"
+  },
+  "actions": {
+    "logout": "Sair",
+    "login": "Entrar"
+  },
+    "students": {
+    "title": "Gerenciamento de Alunos",
+    "subtitle": "Consulte, adicione e gerencie os atletas da sua academia.",
+    "search_placeholder": "Pesquisar aluno...",
+    "add_button": "Novo Aluno",
+    "status_active": "Ativo",
+    "status_inactive": "Inativo",
+    "actions": "Ações",
+    "columns": {
+      "name": "Nome",
+      "belt": "Faixa",
+      "degrees": "Graus",
+      "join_date": "Data de Ingresso",
+      "status": "Status"
+    },
+    "error_loading": "Erro ao carregar a lista de alunos. Tente novamente mais tarde."
+  },
+  "errors": {
+    "not_found_title": "Página Não Encontrada (404)",
+    "not_found_subtitle": "Oops! O golpe que você tentou aplicar não existe ou a página mudou de lugar.",
+    "back_home": "Voltar para o Painel"
+  }
+}
