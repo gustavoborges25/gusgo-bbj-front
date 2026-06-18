@@ -42,5 +42,53 @@
     "not_found_title": "Page Not Found (404)",
     "not_found_subtitle": "Oops! The sweep you tried to perform does not exist or the page has moved.",
     "back_home": "Back to Dashboard"
-  }
+  },
+  "login": {
+    "title": "System Access",
+    "email_label": "Email",
+    "password_label": "Password",
+    "submit_button": "Sign In",
+    "validation": {
+      "email_required": "Email is required.",
+      "email_invalid": "Invalid email format.",
+      "password_required": "Password is required."
+    }
+  },
+  "instructors": {
+    "title": "Instructors Management",
+    "subtitle": "Register and manage your academy's technical staff and black belts.",
+    "add_button": "New Instructor",
+    "search_placeholder": "Search instructor...",
+    "error_loading": "Error loading instructors list.",
+    "error_creating": "Error registering instructor. Check the fields.",
+    "success_creating": "Instructor registered successfully!",
+    "modal_title": "Register New Instructor",
+    "status_active": "Active",
+    "status_inactive": "Inactive",
+    "actions": "Actions",
+    "columns": {
+      "name": "Name",
+      "belt": "Current Belt",
+      "degrees": "Degrees",
+      "status": "Status"
+    },
+    "form": {
+      "name": "Full Name",
+      "email": "Access Email",
+      "password": "Temporary Password",
+      "belt": "Select Belt",
+      "degrees": "Number of Degrees",
+      "save": "Save Instructor",
+      "cancel": "Cancel"
+    },
+    "validation": {
+      "name_required": "Name is required.",
+      "email_required": "Email is required.",
+      "email_invalid": "Invalid email format.",
+      "password_required": "Temporary password is required.",
+      "password_short": "Password must be at least 6 characters long.",
+      "belt_required": "Belt selection is required.",
+      "degree_negative": "Degrees cannot be negative."
+    }
+  }  
 }

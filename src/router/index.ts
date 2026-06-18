@@ -6,7 +6,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: () => import('@/pages/Home.vue'),
-    meta: { requiresAuth: true } // 👈 Informa que esta rota precisa de autenticação
+    meta: { requiresAuth: true }
   },
   {
     path: '/login',
@@ -17,14 +17,38 @@ const routes = [
   {
     path: '/students',
     name: 'StudentsList',
-    component: () => import('@/pages/StudentsList.vue'),
-    meta: { requiresAuth: true } // Exige o token ativo
+    component: () => import('@/pages/students/StudentsList.vue'),
+    meta: { 
+      requiresAuth: true,
+      roles: ['OWNER', 'PROFESSOR']
+    }
+  },
+  {
+    path: '/instructors',
+    name: 'InstructorsList',
+    component: () => import('@/pages/instructors/InstructorsList.vue'),
+    meta: { 
+      requiresAuth: true,
+      roles: ['OWNER']
+    }
+  },
+  {
+    path: '/instructors/create',
+    name: 'InstructorsCreate',
+    component: () => import('@/pages/instructors/InstructorsCreate.vue'),
+    meta: { requiresAuth: true, roles: ['OWNER'] }
+  },
+  {
+    path: '/instructors/:id',
+    name: 'InstructorsEdit',
+    component: () => import('@/pages/instructors/InstructorsEdit.vue'),
+    meta: { requiresAuth: true, roles: ['OWNER'] }
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/pages/NotFound.vue'),
-    meta: { requiresAuth: true } // Garante que precisa estar logado para ver o erro 404 interno
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -34,21 +58,33 @@ const router = createRouter({
 })
 
 // 2. Guarda de Navegação (Navigation Guard) - Executado antes de cada mudança de página
-router.beforeEach((to, from, next) => {
-  // Verifica se o usuário tem o token salvo no localStorage
-  const isAuthenticated = !!localStorage.getItem('user_token')
+router.beforeEach((to) => {
+  const savedUserStr = localStorage.getItem('user_token')
+  const isAuthenticated = !!savedUserStr
 
   // Se a rota exige autenticação e o usuário não está logado, joga para o login
   if (to.meta.requiresAuth && !isAuthenticated) {
-    next({ name: 'Login' })
+    return { name: 'Login' }
   } 
   // Se o usuário já está logado e tenta ir para o login, joga para a dashboard
   else if (to.name === 'Login' && isAuthenticated) {
-    next({ path: '/' })
+    return { path: '/' }
+  } 
+  // Se Usuário está autenticado e mudando de página interna
+  else if (to.meta.requiresAuth && isAuthenticated) {
+    const user = JSON.parse(savedUserStr)
+    const requiredRoles = to.meta.roles
+    
+    // 🔐 Validação de perfil (Role)
+    if (Array.isArray(requiredRoles) && !requiredRoles.includes(user.role)) {
+      return { path: '/' }
+    } else {
+      return true
+    }
   } 
   // Caso contrário, permite a navegação normalmente
   else {
-    next()
+    return true
   }
 })
 

@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <Toaster position="top-right" closeButton richColors />
     <v-main>
       <router-view />
     </v-main>
@@ -7,5 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-  //
+  import { Toaster } from 'vue-sonner'
+  import 'vue-sonner/style.css' 
 </script>

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   jiujitsu-frontend:
     container_name: jiujitsu-front-dev

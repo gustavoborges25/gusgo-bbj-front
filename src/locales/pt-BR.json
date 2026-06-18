@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "OSSO Jiu-Jitsu",
-    "subtitle": "Sistema de Gestão"
+    "subtitle": "Sistema de Gestão",
+    "cancel": "Cancelar"
   },
   "menu": {
     "dashboard": "Painel Principal",
@@ -42,5 +43,81 @@
     "not_found_title": "Página Não Encontrada (404)",
     "not_found_subtitle": "Oops! O golpe que você tentou aplicar não existe ou a página mudou de lugar.",
     "back_home": "Voltar para o Painel"
+  },
+  "login": {
+    "title": "Acesso ao Sistema",
+    "email_label": "E-mail",
+    "password_label": "Senha",
+    "submit_button": "Entrar",
+    "validation": {
+      "email_required": "O e-mail é obrigatório.",
+      "email_invalid": "Formato de e-mail inválido.",
+      "password_required": "A senha é obrigatória."
+    }
+  },
+  "instructors": {
+    "create": {
+      "title": "Cadastrar Novo Professor",
+      "subtitle": "Cadastre a equipe técnica da sua academia."
+    },
+    "list": {
+      "title": "Gerenciamento de Professores",
+      "subtitle": "Gerencie a equipe técnica da sua academia."
+    },
+    "edit": {
+      "title": "Editar Professor",
+      "subtitle": "Edite a equipe técnica da sua academia.",
+      "status": "Status alterado com sucesso!"
+    },
+    "delete": {
+      "title": "Excluir Professor",
+      "subtitle_1": "Esta ação não pode ser desfeita. Tem certeza que deseja remover ",
+      "subtitle_2": " permanentemente do sistema?",
+      "confirm": "Sim, Excluir",
+      "success": "Professor excluído com sucesso!"
+    },
+    "add_button": "Novo Professor",
+    "search_placeholder": "Pesquisar professor...",
+    "error_loading": "Erro ao carregar a lista de professores.",
+    "error_creating": "Erro ao cadastrar o professor. Verifique os dados.",
+    "success_creating": "Professor cadastrado com sucesso!",
+    "status_active": "Ativo",
+    "status_inactive": "Inativo",
+    "actions": {
+      "title": "Ações",
+      "edit": "Editar",
+      "active": "Ativar",
+      "inactive": "Inativar",
+      "delete": "Excluir"
+    },
+    "columns": {
+      "name": "Nome",
+      "belt": "Faixa Atual",
+      "degrees": "Graus",
+      "status": "Status"
+    },
+    "form": {
+      "name": "Nome Completo",
+      "email": "E-mail de Acesso",
+      "password": "Senha Provisória",
+      "password_edit": "Nova senha (deixar em branco caso não queira alterar)",
+      "belt": "Selecione a Faixa",
+      "degrees": "Quantidade de Graus",
+      "save": "Salvar Cadastro",
+      "cancel": "Cancelar"
+    },
+    "validation": {
+      "name_required": "O nome é obrigatório.",
+      "email_required": "O e-mail é obrigatório.",
+      "email_invalid": "E-mail em formato inválido.",
+      "password_required": "A senha provisória é obrigatória.",
+      "password_short": "A senha deve conter no mínimo 6 caracteres.",
+      "belt_required": "A seleção de faixa é obrigatória.",
+      "degree_negative": "Os graus não podem ser negativos."
+    }
+  },
+  "belts": {
+    "select": "Selecione a Faixa",
+    "no_data_found": "Nenhuma faixa encontrada"
   }
 }
