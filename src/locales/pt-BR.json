@@ -22,22 +22,71 @@
     "logout": "Sair",
     "login": "Entrar"
   },
-    "students": {
-    "title": "Gerenciamento de Alunos",
-    "subtitle": "Consulte, adicione e gerencie os atletas da sua academia.",
-    "search_placeholder": "Pesquisar aluno...",
+  "students": {
+    "create": {
+      "title": "Cadastrar Novo Aluno",
+      "subtitle": "Cadastre os alunos da sua academia."
+    },
+    "list": {
+      "title": "Gerenciamento de Alunos",
+      "subtitle": "Gerencie os alunos da sua academia."
+    },
+    "edit": {
+      "title": "Editar Aluno",
+      "subtitle": "Edite os alunos da sua academia.",
+      "status": "Status alterado com sucesso!"
+    },
+    "import": {
+      "title": "Importar Alunos via Arquivo",
+      "subtitle": "Insira vários alunos novos através de um único arquivo."
+    },
+    "delete": {
+      "title": "Excluir Aluno",
+      "subtitle_1": "Esta ação não pode ser desfeita. Tem certeza que deseja remover o aluno ",
+      "subtitle_2": " permanentemente do sistema?",
+      "confirm": "Sim, Excluir",
+      "success": "Aluno excluído com sucesso!"
+    },
     "add_button": "Novo Aluno",
+    "import_button": "Importar via Arquivo",
+    "search_placeholder": "Pesquisar aluno...",
+    "error_loading": "Erro ao carregar a lista de alunos.",
+    "error_creating": "Erro ao cadastrar o aluno. Verifique os dados.",
+    "success_creating": "Aluno cadastrado com sucesso!",
     "status_active": "Ativo",
     "status_inactive": "Inativo",
-    "actions": "Ações",
+    "actions": {
+      "title": "Ações",
+      "edit": "Editar",
+      "active": "Ativar",
+      "inactive": "Inativar",
+      "delete": "Excluir"
+    },
     "columns": {
       "name": "Nome",
-      "belt": "Faixa",
+      "birth_date": "Data de nascimento",
+      "belt": "Faixa Atual",
       "degrees": "Graus",
-      "join_date": "Data de Ingresso",
       "status": "Status"
     },
-    "error_loading": "Erro ao carregar a lista de alunos. Tente novamente mais tarde."
+    "form": {
+      "name": "Nome Completo",
+      "birth_date": "Data de nascimento",
+      "belt": "Selecione a Faixa",
+      "degrees": "Quantidade de Graus",
+      "save": "Salvar Aluno",
+      "cancel": "Cancelar",
+      "notes": {
+        "label": "Anotações",
+        "placeholder": "Registre informações e anotações sobre seu aluno."
+      }
+    },
+    "validation": {
+      "name_required": "O nome é obrigatório.",
+      "birth_date_invalid": "Data de nascimento inválida",
+      "belt_required": "A seleção de faixa é obrigatória.",
+      "degree_negative": "Os graus não podem ser negativos."
+    }
   },
   "errors": {
     "not_found_title": "Página Não Encontrada (404)",
@@ -71,7 +120,7 @@
     },
     "delete": {
       "title": "Excluir Professor",
-      "subtitle_1": "Esta ação não pode ser desfeita. Tem certeza que deseja remover ",
+      "subtitle_1": "Esta ação não pode ser desfeita. Tem certeza que deseja remover o professor ",
       "subtitle_2": " permanentemente do sistema?",
       "confirm": "Sim, Excluir",
       "success": "Professor excluído com sucesso!"
@@ -103,7 +152,7 @@
       "password_edit": "Nova senha (deixar em branco caso não queira alterar)",
       "belt": "Selecione a Faixa",
       "degrees": "Quantidade de Graus",
-      "save": "Salvar Cadastro",
+      "save": "Salvar Professor",
       "cancel": "Cancelar"
     },
     "validation": {

@@ -89,10 +89,9 @@ const { t } = useI18n()
 defineProps({
   isEdit: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
-  isValid: { type: Boolean, default: false } // Recebe o estado do validador do pai
+  isValid: { type: Boolean, default: false }
 })
 
-// O defineModel vincula diretamente o v-model do pai sem precisar de Watchers manuais criadores de loops
 const form = defineModel({ type: Object, required: true })
 
 const nameRules = [v => !!v || t('instructors.validation.name_required')]

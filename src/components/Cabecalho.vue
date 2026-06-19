@@ -1,5 +1,5 @@
 <template>
-    <v-row class="mb-4 align-center">
+    <v-row class="mb-4">
         <v-col cols="12" sm="8"  class="d-flex align-center">
             <v-btn
                 v-if="back"
@@ -18,17 +18,19 @@
                 </p>
             </div>
         </v-col>
-        <v-col v-if="forwardRoute" cols="12" sm="4" class="text-sm-right">
-            <v-btn 
-                color="primary" 
-                prepend-icon="mdi-account-plus" 
-                size="large" 
-                rounded="md" 
-                elevation="1"
-                :to="forwardRoute"
-            >
-                {{ forwardText }}
-            </v-btn>
+        <v-col v-if="forwardRoute" cols="12" sm="4" class="d-flex justify-end align-self-end text-sm-right gap-2">
+            <slot name="actions">
+                <v-btn 
+                    color="primary" 
+                    prepend-icon="mdi-account-plus" 
+                    size="large" 
+                    rounded="md" 
+                    elevation="1"
+                    :to="forwardRoute"
+                >
+                    {{ forwardText }}
+                </v-btn>
+            </slot>
         </v-col>
     </v-row>
 </template>   
@@ -44,3 +46,8 @@ defineProps({
 })
 
 </script>
+<style scoped>
+.gap-2 {
+  gap: 8px;
+}
+</style>

@@ -1,169 +1,180 @@
 <template>
   <MenuLayout>
-    <!-- Cabeçalho da Página -->
-    <v-row class="mb-4 align-center justify-space-between">
-      <v-col cols="12" sm="8">
-        <h1 class="text-h4 font-weight-bold text-grey-darken-3">
-          {{ $t('students.title') }}
-        </h1>
-        <p class="text-subtitle-1 text-medium-emphasis">
-          {{ $t('students.subtitle') }}
-        </p>
-      </v-col>
-      <v-col cols="12" sm="4" class="text-sm-right">
-        <v-btn color="primary" prepend-icon="mdi-account-plus" size="large" rounded="md" elevation="1">
-          {{ $t('students.add_button') }}
-        </v-btn>
-      </v-col>
-    </v-row>
-
-    <!-- Alerta de Erro de Conectividade -->
-    <v-alert v-if="errorMsg" type="error" variant="tonal" class="mb-4" closable @click:close="errorMsg = ''">
-      {{ errorMsg }}
-    </v-alert>
-
-    <!-- Card Principal com Filtro e Tabela -->
-    <v-card border flat class="pa-4 rounded-lg">
-      <v-card-title class="px-0 pt-0 mb-4">
-        <v-row>
-          <v-col cols="12" md="4">
-            <v-text-field
-              v-model="search"
-              :placeholder="$t('students.search_placeholder')"
-              prepend-inner-icon="mdi-magnify"
+        <Cabecalho 
+          :title="$t('students.list.title')"
+          :subtitle="$t('students.list.subtitle')"
+          forwardRoute="/students/create"
+          :forwardText="$t('students.add_button')"
+        >        
+          <template #actions>
+            <v-btn 
+              color="secondary" 
               variant="outlined"
-              density="compact"
-              hide-details
-              flat
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-card-title>
+              prepend-icon="mdi-file-upload-outline" 
+              size="large" 
+              rounded="md"
+              to="/students/import"
+            >
+              {{ $t('students.import_button') }}
+            </v-btn>
 
-      <!-- Tabela de Dados Conectada à API -->
-      <v-data-table
-        :headers="headers"
-        :items="students"
-        :search="search"
-        :loading="loading"
-        hover
-        class="border-thin rounded"
-      >
-        <!-- Customização do indicador de carregamento -->
-        <template #loading>
-          <v-progress-linear color="primary" indeterminate height="3" class="mt-2"></v-progress-linear>
-        </template>
+            <v-btn 
+              color="primary" 
+              prepend-icon="mdi-account-plus" 
+              size="large" 
+              rounded="md" 
+              elevation="1"
+              to="/students/create"
+            >
+              {{ $t('students.add_button') }}
+            </v-btn>
+          </template>
+        </Cabecalho>
+    <BaseDataTable
+      :headers="headers"
+      :items="students"
+      :loading="loadingTable"
+      :search-placeholder="$t('students.search_placeholder')"
+    >
+      <template #item.birthDate="{ value }">
+        {{ formatarData(value) }}
+      </template>
 
-        <!-- Customização da Coluna de Faixas -->
-        <template #[`item.currentBeltName`]="{ item }">
-          <v-chip
-            :color="getBeltChipColor(item.currentBeltName)"
-            size="small"
-            class="font-weight-bold border-sm text-capitalize"
-            variant="flat"
-          >
-            <v-icon icon="mdi-medal" start size="16"></v-icon>
-            {{ item.currentBeltName }}
-          </v-chip>
-        </template>
+      <template #[`item.beltName`]="{ item }">
+        <v-chip
+          :color="item.beltColor"
+          size="small"
+          class="font-weight-bold border-sm text-capitalize"
+          variant="flat"
+        >
+          <v-icon icon="mdi-medal" start size="16"></v-icon>
+          {{ item.beltName }}
+        </v-chip>
+      </template>
 
-        <!-- Customização da Coluna de Graus -->
-        <template #[`item.beltDegree`]="{ item }">
-          <span class="font-weight-bold">{{ item.beltDegree }} 🌟</span>
-        </template>
+      <template #[`item.degree`]="{ item }">
+        <span class="font-weight-bold">{{ item.degree }} 🌟</span>
+      </template>
 
-        <!-- Customização da Coluna de Status -->
-        <template #[`item.active`]="{ item }">
-          <v-badge
-            dot
-            inline
-            :color="item.active ? 'success' : 'error'"
-            class="font-weight-medium"
-          >
-            {{ item.active ? $t('students.status_active') : $t('students.status_inactive') }}
-          </v-badge>
-        </template>
+      <template #item.joinDate="{ value }">
+        {{ formatarData(value) }}
+      </template>
 
-        <!-- Customização da Coluna de Ações -->
-        <template #[`item.actions`]="{ item }">
-          <v-btn icon="mdi-pencil" size="x-small" variant="text" color="info" class="me-1" @click="editStudent(item)"></v-btn>
-          <v-btn icon="mdi-delete" size="x-small" variant="text" color="error" @click="deleteStudent(item)"></v-btn>
-        </template>
-      </v-data-table>
-    </v-card>
+      <template #[`item.active`]="{ item }">
+        <v-badge dot inline :color="item.active ? 'success' : 'error'">
+          <span style="margin-right: 5px;">{{ item.active ? $t('students.status_active') : $t('students.status_inactive') }}</span>
+        </v-badge>
+      </template>
+
+      <template #[`item.actions`]="{ item }">
+        <v-btn v-tooltip="$t('students.actions.edit')" icon="mdi-account-edit" size="small" variant="text" color="#ffc107" @click="handleEdit(item)"></v-btn>
+        <v-btn v-tooltip="item.active ? $t('students.actions.inactive') : $t('students.actions.active')" icon="mdi-toggle-switch" size="small" variant="text" :color="item.active ? 'success' : 'grey'" @click="toggleStatus(item)"></v-btn>
+        <v-btn v-tooltip="$t('students.actions.delete')" icon="mdi-delete" size="small" variant="text" color="error" @click="openDeleteModal(item)"></v-btn>
+      </template>
+    </BaseDataTable>
+
+    <ConfirmDialog
+      v-model="deleteModal"
+      :loading="loadingDelete"
+      :title="$t('students.delete.title')"
+      :message="$t('students.delete.subtitle_1') + selectedName + $t('students.delete.subtitle_2')"
+      :confirm-text="$t('students.delete.confirm')"
+      color="error"
+      icon="mdi-trash-can-outline"
+      @confirm="handleDelete"
+    />
+
   </MenuLayout>
 </template>
 
 <script setup>
 import MenuLayout from '@/layouts/MenuLayout.vue'
-import api from '@/plugins/axios' // 👈 Importa a nossa instância global do Axios
+import Cabecalho from '@/components/Cabecalho.vue'
+import BaseDataTable from '@/components/BaseDataTable.vue'
+import ConfirmDialog from '@/components/ConfirmDialog.vue'
+import api from '@/plugins/axios'
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { toast } from 'vue-sonner'
+import { useRouter } from 'vue-router'
+import { useDateFormatter } from '@/composables/useDateFormatter';
 
 const { t } = useI18n()
-const search = ref('')
 const students = ref([])
-const loading = ref(false)
-const errorMsg = ref('')
+const loadingTable = ref(false)
+const router = useRouter()
+const deleteModal = ref(false)
+const loadingDelete = ref(false)
+const selectedId = ref(null)
+const selectedName = ref(null)
+const { formatarData } = useDateFormatter();
 
-// Configuração das colunas
 const headers = computed(() => [
   { title: t('students.columns.name'), key: 'name', sortable: true },
-  { title: t('students.columns.belt'), key: 'currentBeltName', sortable: true, align: 'center' },
-  { title: t('students.columns.degrees'), key: 'beltDegree', sortable: true, align: 'center' },
+  { title: t('students.columns.birth_date'), key: 'birthDate', sortable: true },
+  { title: t('students.columns.belt'), key: 'beltName', sortable: true, align: 'center' },
+  { title: t('students.columns.degrees'), key: 'degree', sortable: true, align: 'center' },
   { title: t('students.columns.join_date'), key: 'joinDate', sortable: true },
   { title: t('students.columns.status'), key: 'active', sortable: true, align: 'center' },
   { title: t('students.actions'), key: 'actions', sortable: false, align: 'right' }
 ])
 
-// 🔄 Função que busca os dados reais do Spring Boot
 const fetchStudents = async () => {
-  loading.value = true
-  errorMsg.value = ''
-  
+  loadingTable.value = true
   try {
-    // 1. Recupera as informações do usuário logado para saber qual o id da academia
-    const savedUser = localStorage.getItem('user_token')
-    if (!savedUser) return
-    
-    const user = JSON.parse(savedUser)
-    const academyId = user.academyId
-
-    // 2. Faz a chamada HTTP para o endpoint: GET /api/v1/students/academy/{academyId}
-    const response = await api.get(`/students/academy/${academyId}`)
-    
-    // 3. Alimenta a tabela mapeando o wrapper RestResponse (response.data.data)
+    const response = await api.get('/students')
     students.value = response.data.data
   } catch (error) {
-    console.error('API Error:', error)
-    errorMsg.value = error.response?.data?.message || t('students.error_loading')
+    toast.error(error.response?.data?.message || 'Falha ao carregar a lista de alunos.')
   } finally {
-    loading.value = false
+    loadingTable.value = false
   }
 }
 
-// Dispara a busca assim que o componente é montado na árvore do Vue
-onMounted(() => {
-  fetchStudents()
-})
+const openDeleteModal = (students) => {
+  selectedId.value = students.id
+  selectedName.value = students.name
+  deleteModal.value = true
+}
 
-const getBeltChipColor = (beltName) => {
-  if (!beltName) return 'grey'
-  switch (beltName.toLowerCase()) {
-    case 'branca': return 'grey-lighten-4 text-black'
-    case 'azul': return 'blue-darken-2'
-    case 'roxa': return 'purple-darken-2'
-    case 'marrom': return 'brown-darken-2'
-    case 'preta': return 'black text-white'
-    default: return 'grey-darken-1'
+const toggleStatus = async (item) => {
+  const originalStatus = item.active 
+
+  try {
+    const response = await api.patch(`/students/${item.id}`, {
+      active: !originalStatus
+    })
+
+    const updatedStudent = response.data.data
+    item.active = updatedStudent.active
+    toast.success(t('students.edit.status'))
+  } catch (error) {
+    toast.error(error.response?.data?.message || 'Falha ao mudar o status do aluno.')
+    item.active = originalStatus
   }
 }
 
-const editStudent = (student) => {
-  console.log('Edit student:', student.name)
+const handleDelete = async () => {
+  if (!selectedId.value) return
+
+  loadingDelete.value = true
+  try {
+    await api.delete(`/students/${selectedId.value}`)
+    deleteModal.value = false
+    selectedId.value = null
+    selectedName.value = null
+    toast.success(t('students.delete.success'))
+    fetchInstructors()
+  } catch (error) {
+    toast.error(error.response?.data?.message || 'Falha ao excluir o aluno.')
+  } finally {
+    loadingDelete.value = false
+  }
 }
 
-const deleteStudent = (student) => {
-  console.log('Delete student ID:', student.id)
+const handleEdit = (item) => {
+  router.push(`/students/${item.id}`)
 }
+
+onMounted(() => { fetchStudents() })
 </script>
