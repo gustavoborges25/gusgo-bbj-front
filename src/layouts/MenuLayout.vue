@@ -28,7 +28,7 @@
 
       <v-divider></v-divider>
 
-      <v-list nav>
+      <v-list nav v-model:opened="openedGroups">
         <v-list-item 
           prepend-icon="mdi-account-tie" 
           :title="$t('menu.instructors')" 
@@ -45,18 +45,19 @@
         ></v-list-item>
 
         <v-list-item 
-          prepend-icon="mdi-google-classroom" 
-          :title="$t('menu.classes')"
-          to="/classes" 
-          value="classes"
+          prepend-icon="mdi-medal" 
+          :title="$t('menu.techniques')"
+          to="/techniques" 
+          value="techniques"
         ></v-list-item>
 
         <v-list-item 
-          prepend-icon="mdi-medal" 
-          :title="$t('menu.curriculum')"
-          to="/curriculum" 
-          value="curriculum"
+          prepend-icon="mdi-google-classroom" 
+          :title="$t('menu.methodologies')"
+          to="/methodologies" 
+          value="methodologies"
         ></v-list-item>
+
       </v-list>
     </v-navigation-drawer>
 

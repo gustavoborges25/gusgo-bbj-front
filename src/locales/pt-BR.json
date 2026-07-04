@@ -8,8 +8,8 @@
     "dashboard": "Painel Principal",
     "students": "Alunos",
     "instructors": "Professores",
-    "classes": "Aulas & Chamadas",
-    "curriculum": "Faixas & Currículo"
+    "methodologies": "Metodologias",
+    "techniques": "Técnicas / Posições"
   },
   "dashboard": {
     "welcome": "Bem-vindo de volta, Sensei!",
@@ -38,7 +38,19 @@
     },
     "import": {
       "title": "Importar Alunos via Arquivo",
-      "subtitle": "Insira vários alunos novos através de um único arquivo."
+      "subtitle": "Insira vários alunos novos através de um único arquivo.",
+      "charge_file": "Carregar arquivo",
+      "import_file": "Selecionar arquivo",
+      "model_xlsx": " Baixar Modelo .XLSX",
+      "save": "Salvar Alunos",
+      "list": {
+        "header_name": "Nome",
+        "header_birth_date": "Data de Nascimento",
+        "header_belt_name": "Faixa",
+        "header_degree": "Graus",
+        "header_status": "Status",
+        "header_errors": "Erro"
+      }
     },
     "delete": {
       "title": "Excluir Aluno",
@@ -163,6 +175,57 @@
       "password_short": "A senha deve conter no mínimo 6 caracteres.",
       "belt_required": "A seleção de faixa é obrigatória.",
       "degree_negative": "Os graus não podem ser negativos."
+    }
+  },
+  "techniques": {
+    "create": {
+      "title": "Cadastrar Nova Técnica",
+      "subtitle": "Cadastre a técnica e posições da sua academia."
+    },
+    "list": {
+      "title": "Gerenciamento de Técnicas",
+      "subtitle": "Gerencie a técnica e posições da sua academia."
+    },
+    "edit": {
+      "title": "Editar Técnica",
+      "subtitle": "Edite técnica e posição da sua academia.",
+      "status": "Status alterado com sucesso!"
+    },
+    "delete": {
+      "title": "Excluir Técnica",
+      "subtitle_1": "Esta ação não pode ser desfeita. Tem certeza que deseja remover a técnica ",
+      "subtitle_2": " permanentemente do sistema?",
+      "confirm": "Sim, Excluir",
+      "success": "Técnica excluída com sucesso!"
+    },
+    "add_button": "Nova Técnica",
+    "search_placeholder": "Pesquisar técnica...",
+    "error_loading": "Erro ao carregar a lista de técnicas.",
+    "error_creating": "Erro ao cadastrar a técnica. Verifique os dados.",
+    "success_creating": "Técnica cadastrada com sucesso!",
+    "status_active": "Ativo",
+    "status_inactive": "Inativo",
+    "actions": {
+      "title": "Ações",
+      "edit": "Editar",
+      "active": "Ativar",
+      "inactive": "Inativar",
+      "delete": "Excluir"
+    },
+    "columns": {
+      "name": "Nome",
+      "description": "Descrição",
+      "status": "Status"
+    },
+    "form": {
+      "name": "Nome",
+      "description": "Descrição",
+      "video_url": "Link para video(Youtube)",
+      "save": "Salvar Técnica",
+      "cancel": "Cancelar"
+    },
+    "validation": {
+      "name_required": "O nome é obrigatório."
     }
   },
   "belts": {

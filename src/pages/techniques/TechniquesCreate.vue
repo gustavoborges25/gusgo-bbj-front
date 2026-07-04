@@ -1,16 +1,16 @@
 <template>
   <MenuLayout>
     <Cabecalho 
-      :title="$t('students.create.title')"
-      :subtitle="$t('students.create.subtitle')"
-      back="/students"
+      :title="$t('techniques.create.title')"
+      :subtitle="$t('techniques.create.subtitle')"
+      back="/techniques"
     />
 
     <v-row >
       <v-col cols="12">
         <v-card border flat class="pa-6 rounded-lg">
           <v-form v-model="isFormValid" @submit.prevent="submitForm">
-            <StudentForm 
+            <TechniqueForm 
               v-model="form" 
               :loading="loadingSubmit" 
               :is-valid="isFormValid"
@@ -25,7 +25,7 @@
 <script setup>
 import MenuLayout from '@/layouts/MenuLayout.vue'
 import Cabecalho from '@/components/Cabecalho.vue'
-import StudentForm from '@/pages/students/StudentsForm.vue'
+import TechniqueForm from '@/pages/techniques/TechniquesForm.vue'
 import api from '@/plugins/axios'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -38,11 +38,9 @@ const isFormValid = ref(false)
 
 const form = ref({
   name: '',
-  birthDate: '',
-  beltId: null,
-  degree: 0,
-  active: true,
-  notes: ''
+  description: '',
+  videoUrl: '',
+  active: true
 })
 
 const submitForm = async () => {
@@ -50,10 +48,10 @@ const submitForm = async () => {
   loadingSubmit.value = true
 
   try {
-    await api.post('/students', form.value)
-    router.push('/students')
+    await api.post('/techniques', form.value)
+    router.push('/techniques')
   } catch (error) {
-    toast.error(error.response?.data?.message || 'Failed to create student.')
+    toast.error(error.response?.data?.message || 'Failed to create technique.')
   } finally {
     loadingSubmit.value = false
   }

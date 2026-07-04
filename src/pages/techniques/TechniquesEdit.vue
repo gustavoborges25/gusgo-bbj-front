@@ -1,9 +1,9 @@
 <template>
   <MenuLayout>
     <Cabecalho 
-      :title="$t('instructors.edit.title')"
-      :subtitle="$t('instructors.edit.subtitle')"
-      back="/instructors"
+      :title="$t('techniques.edit.title')"
+      :subtitle="$t('techniques.edit.subtitle')"
+      back="/techniques"
     />
 
     <v-row v-if="loadingFetch" justify="center" class="my-12">
@@ -14,7 +14,7 @@
       <v-col cols="12">
         <v-card border flat class="pa-6 rounded-lg">
           <v-form v-model="isFormValid" @submit.prevent="submitForm">
-            <InstructorForm 
+            <TechniqueForm 
               v-model="form" 
               is-edit 
               :loading="loadingSubmit" 
@@ -30,7 +30,7 @@
 <script setup>
 import MenuLayout from '@/layouts/MenuLayout.vue'
 import Cabecalho from '@/components/Cabecalho.vue'
-import InstructorForm from '@/pages/instructors/InstructorsForm.vue'
+import TechniqueForm from '@/pages/techniques/TechniquesForm.vue'
 import api from '@/plugins/axios'
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -42,33 +42,29 @@ const route = useRoute()
 const loadingFetch = ref(false)
 const loadingSubmit = ref(false)
 const isFormValid = ref(false)
-const instructorId = route.params.id
+const techniqueId = route.params.id
 
 const form = ref({
   name: '',
-  email: '',
-  password: '',
-  beltId: null,
-  degree: 0,
+  description: '',
+  videoUrl: '',
   active: true
 })
 
-const fetchInstructorData = async () => {
+const fetchTechniqueData = async () => {
   loadingFetch.value = true
   try {
-    const response = await api.get(`/instructors/${instructorId}`)
+    const response = await api.get(`/techniques/${techniqueId}`)
     const data = response.data.data
     
     form.value = {
       name: data.name,
-      email: data.email,
-      password: '', // Mantém limpo na edição
-      beltId: data.beltId,
-      degree: data.degree,
+      description: data.description,
+      videoUrl: data.videoUrl,
       active: data.active ?? true // Garante fallback booleano
     }
   } catch (error) {
-    toast.error(error.response?.data?.message || 'Failed to load instructor data.')
+    toast.error(error.response?.data?.message || 'Failed to load technique data.')
   } finally {
     loadingFetch.value = false
   }
@@ -79,16 +75,16 @@ const submitForm = async () => {
   
   loadingSubmit.value = true
   try {
-    await api.put(`/instructors/${instructorId}`, form.value)
-    router.push('/instructors')
+    await api.put(`/techniques/${techniqueId}`, form.value)
+    router.push('/techniques')
   } catch (error) {
-    toast.error(error.response?.data?.message || 'Failed to update instructor.')
+    toast.error(error.response?.data?.message || 'Failed to update technique.')
   } finally {
     loadingSubmit.value = false
   }
 }
 
 onMounted(() => {
-  fetchInstructorData()
+  fetchTechniqueData()
 })
 </script>

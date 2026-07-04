@@ -30,7 +30,7 @@
 <script setup>
 import MenuLayout from '@/layouts/MenuLayout.vue'
 import Cabecalho from '@/components/Cabecalho.vue'
-import StudentForm from '@/components/StudentForm.vue'
+import StudentForm from '@/pages/students/StudentsForm.vue'
 import api from '@/plugins/axios'
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'

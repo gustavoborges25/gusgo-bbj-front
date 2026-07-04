@@ -25,7 +25,7 @@
 <script setup>
 import MenuLayout from '@/layouts/MenuLayout.vue'
 import Cabecalho from '@/components/Cabecalho.vue'
-import InstructorForm from '@/components/InstructorForm.vue'
+import InstructorForm from '@/pages/instructors/InstructorsForm.vue'
 import api from '@/plugins/axios'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
